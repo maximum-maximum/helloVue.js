@@ -16,7 +16,7 @@
     <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
     <div id="app" class="container">
       <p>{{ message }}</p>
-      <hello />
+      <hello v-for="item in data" v-bind:name="item" />
     </div>
 
     <script>
@@ -24,6 +24,7 @@
         data() {
           return {
             message: "※コンポーネントを表示する",
+            data: ["Taro", "Hanako", "Sachiko", "Jiro"],
           };
         },
       };
@@ -31,7 +32,13 @@
       let app = Vue.createApp(appdata);
 
       app.component("hello", {
-        template: '<p class="alert alert-primary">Hello!</p>',
+        props: { name: String },
+        data() {
+          return {
+            message: "これは新しいメッセージです。",
+          };
+        },
+        template: '<p class="alert alert-primary">Hello, {{name}}!</p>',
       });
 
       app.mount("#app");
