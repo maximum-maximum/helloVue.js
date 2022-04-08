@@ -16,7 +16,9 @@
     <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
     <div id="app" class="container">
       <p>{{ message }}</p>
-      <hello />
+      <div><hello /></div>
+      <div><hello /></div>
+      <div><hello /></div>
     </div>
 
     <script>
@@ -24,39 +26,23 @@
         data() {
           return {
             message: "※コンポーネントを表示する",
-            name: "no-name",
           };
+        },
+        components: {
+          hello: {
+            data() {
+              return {
+                counter: 0,
+              };
+            },
+            template: `<p v-on:click="counter++" 
+            class="alert alert-info h5">
+              clicked: {{counter}}.</p>`,
+          },
         },
       };
 
       let app = Vue.createApp(appdata);
-
-      app.component("hello", {
-        data() {
-          return {
-            counter: 0,
-            isInfo: true,
-            isDark: false,
-          };
-        },
-        methods: {
-          doAction() {
-            this.counter++;
-            console.log("counter");
-            if (this.counter % 2 == 0) {
-              this.isInfo = true;
-              this.isDark = false;
-              console.log("true");
-            } else {
-              this.isInfo = false;
-              this.isDark = true;
-              console.log("false");
-            }
-          },
-        },
-        template:
-          '<p v-on:click="doAction" v-bind:class="{\'alert-warning\':isInfo, \'alert-dark\':isDark}" class="alert">clicked: {{counter}}.</p>',
-      });
 
       app.mount("#app");
     </script>
