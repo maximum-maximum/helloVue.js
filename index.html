@@ -13,27 +13,36 @@
   </head>
 
   <body>
+    <style>
+      .ok {
+        font-size: 24pt;
+        color: blue;
+        padding: 5px 10px;
+        border: 2px solid red;
+      }
+      .ng {
+        font-size: 20pt;
+        color: gray;
+      }
+    </style>
     <h1 class="bg-secondary text-white display-4 px-3">Vue3</h1>
-    <div id="app" class="container h5">
-      <p class="alert alert-primary">{{ message }}</p>
-      <p class="alert alert-secondary">{{ message }}</p>
-      <p class="alert alert-success">{{ message }}</p>
-      <p class="alert alert-danger">{{ message }}</p>
-      <p class="alert alert-warning">{{ message }}</p>
-      <p class="alert alert-info">{{ message }}</p>
-      <p class="alert alert-light">{{ message }}</p>
-      <p class="alert alert-dark">{{ message }}</p>
+    <div id="app" class="container">
+      <p v-if="flag" class="ok">{{ message }}</p>
+      <p v-else class="ng">※現在、問題が発生中です……</p>
     </div>
 
     <script>
       const appdata = {
         data() {
           return {
-            message: null,
+            message: "This is sample page.",
+            flag: true,
           };
         },
         mounted() {
-          this.message = "This is sample page.";
+          setInterval(() => {
+            this.flag = !this.flag;
+          }, 10000);
         },
       };
 
