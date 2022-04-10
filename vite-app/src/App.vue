@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <HelloWorld
-      title="Hello"
-      message="※これは、Vue3のサンプルプロジェクトです。"
-    />
+    <HelloWorld v-bind:title="message" v-on:result-event="appAction" />
+    <hr />
+    <p>{{ result }}</p>
   </div>
 </template>
 
@@ -11,9 +10,20 @@
 import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: "App",
+  name: "app",
   components: {
     HelloWorld,
+  },
+  data() {
+    return {
+      message: "HELLO",
+      result: "no event.",
+    };
+  },
+  methods: {
+    appAction(message) {
+      this.result = '(*** you send:"' + message + '". ***)';
+    },
   },
 };
 </script>
